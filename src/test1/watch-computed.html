@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+//这个页面是目的就是理解使用watch 和 computed,通过在chrome 命令来改变msg1和msg2的值看输出结果
+<div id="app2">
+  <p>{{msg1}}</p>
+  <p>{{msg2}}</p>
+  <p>{{msg3}}</p>
+</div>
+
+<script>
+
+  //vm 变量的作用就是可以再chrome 命令行通过vm变量来获取或改变vue 中的变量值
+  var vm = new Vue({
+    //id需要#号开头
+    el: '#app2',
+    //只有在data中的变量才会交给vue来管理,才会有数据变化让页面{{}}中的数据跟着变化
+    data: {
+      msg1: 'hello1',
+      msg2: 'hello2'
+    },
+    //watch 只会监听声明在function之前定义的一个变量如msg1
+    watch: {
+      msg1: function (newVal, oldVal) {
+        console.log(newVal + "---" + oldVal)
+      }
+    },
+    //computed 会监听function中的全部变量,如果其中变量被修改后,会导致msg3重新赋值
+    computed: {
+      msg3: function () {
+        return this.msg1 + this.msg2;
+      }
+    }
+
+
+  })
+
+</script>
+
+</body>
+</html>
